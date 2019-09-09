@@ -32,6 +32,7 @@ RUN curl -LO ${SBCL_URL} && \
     tar -xf sbcl-${SBCL_VERSION}-source.tar.bz2 && \
     rm /src/sbcl-${SBCL_VERSION}-source.tar.bz2 && \
     cd /src/sbcl-${SBCL_VERSION} && \
+    ln -s /src/sbcl-${SBCL_VERSION} /src/sbcl && \
     bash make.sh --fancy --with-sb-dynamic-core --with-sb-linkable-runtime && \
     (cd src/runtime && make libsbcl.a) && \
     bash install.sh && \
