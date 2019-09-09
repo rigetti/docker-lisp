@@ -14,6 +14,7 @@ RUN apt-get update -y && \
     curl \
     # used in downstream images (rpcq, quilc, qvm)
     clang-7 \
+    cmake \
     git \
     libblas-dev \
     libffi-dev \
