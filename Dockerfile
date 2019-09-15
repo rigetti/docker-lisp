@@ -14,6 +14,7 @@ RUN apt-get update -y && \
     curl \
     # used in downstream images (rpcq, quilc, qvm)
     clang-7 \
+    cmake \
     git \
     libblas-dev \
     libffi-dev \
@@ -32,10 +33,11 @@ RUN curl -LO ${SBCL_URL} && \
     tar -xf sbcl-${SBCL_VERSION}-source.tar.bz2 && \
     rm /src/sbcl-${SBCL_VERSION}-source.tar.bz2 && \
     cd /src/sbcl-${SBCL_VERSION} && \
-    bash make.sh --fancy && \
+    ln -s /src/sbcl-${SBCL_VERSION} /src/sbcl && \
+    bash make.sh --fancy --with-sb-dynamic-core --with-sb-linkable-runtime && \
+    (cd src/runtime && make libsbcl.a) && \
     bash install.sh && \
-    cd - && \
-    rm -rf /src/sbcl-${SBCL_VERSION}
+    cd -
 
 # install quicklisp (requirements: curl, sbcl)
 RUN curl -o /tmp/quicklisp.lisp 'https://beta.quicklisp.org/quicklisp.lisp' && \
