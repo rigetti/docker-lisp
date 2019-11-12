@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:stretch
 
 # build variables
 ARG SBCL_VERSION
@@ -13,7 +13,6 @@ RUN apt-get update -y && \
     build-essential \
     curl \
     # used in downstream images (rpcq, quilc, qvm)
-    clang-7 \
     cmake \
     git \
     libblas-dev \
