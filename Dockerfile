@@ -50,7 +50,7 @@ RUN curl -o /tmp/quicklisp.lisp 'https://beta.quicklisp.org/quicklisp.lisp' && \
 # quickload libraries
 ADD . /src/docker-lisp
 WORKDIR /src/docker-lisp
-RUN sbcl --eval '(ql:quickload (uiop:read-file-lines "quicklisp-libraries.txt"))' --quit
+RUN sbcl --load "quantumlisp.lisp" --eval '(ql:quickload (uiop:read-file-lines "quicklisp-libraries.txt"))' --quit
 
 # enter into an SBCL REPL (requirements: rlwrap, sbcl)
 CMD sleep 0.05; rlwrap sbcl
