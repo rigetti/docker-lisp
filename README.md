@@ -1,7 +1,6 @@
 docker-lisp
 ===========
 
-(https://gitlab.com/rigetti/forest/docker-lisp/commits/master)
 [![docker pulls](https://img.shields.io/docker/pulls/rigetti/lisp.svg)](https://hub.docker.com/r/rigetti/lisp)
 
 Docker image that contains the latest version of [Steel Bank Common Lisp](http://www.sbcl.org/),
