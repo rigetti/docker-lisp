@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:bullseye
 
 # build variables
 ARG SBCL_VERSION
@@ -22,6 +22,7 @@ RUN apt-get update -y && \
     libzmq3-dev \
     # used in the Dockerfile CMD
     rlwrap \
+    libzstd-dev \
     # used to install sbcl and quicklisp
     sbcl && \
     apt-get clean
@@ -50,7 +51,7 @@ RUN curl -o /tmp/quicklisp.lisp 'https://beta.quicklisp.org/quicklisp.lisp' && \
 # quickload libraries
 ADD . /src/docker-lisp
 WORKDIR /src/docker-lisp
-RUN sbcl --load "quantumlisp.lisp" --eval '(ql:quickload (uiop:read-file-lines "quicklisp-libraries.txt"))' --quit
+RUN sbcl --dynamic-space-size 4096 --load "quantumlisp.lisp" --eval '(ql:quickload (uiop:read-file-lines "quicklisp-libraries.txt"))' --quit
 
 # enter into an SBCL REPL (requirements: rlwrap, sbcl)
 CMD sleep 0.05; rlwrap sbcl
