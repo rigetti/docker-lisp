@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:bullseye
 
 # build variables
 ARG SBCL_VERSION
